@@ -4,6 +4,7 @@ namespace SlotMachine
 {
     internal class Program
     {
+        const int SLOTS_MAX = 9;
         const string DIVIDER = "================================================================";
         const string BLANKER = "                                                                ";
         static void Main(string[] args)
@@ -23,7 +24,7 @@ namespace SlotMachine
                 for (int j=0; j<3; j++)
                 {
                     Random randomSlot = new Random();
-                    int randomSlotValue = randomSlot.Next(4);
+                    int randomSlotValue = randomSlot.Next(SLOTS_MAX);
                     slotGrid[i, j] = randomSlotValue;
                     //Console.Write($"{randomSlotValue} ");
                 }
@@ -40,6 +41,22 @@ namespace SlotMachine
                 char[] rowDetailChars = rowDetail.ToArray();
                 //Console.WriteLine($"Row {k} is {String.Join(' ', rowDetailChars)}");
                 Console.WriteLine($"{String.Join(' ', rowDetailChars)}");
+            }
+
+            bool win = false;
+            // Check middle row for matches
+            if (slotGrid[1,0] == slotGrid[1, 1] && slotGrid[1, 0] == slotGrid[1, 2])
+            {
+                win = true;
+            }
+
+            if (win)
+            {
+                Console.WriteLine($"MIDDLE ROW MATCH - CONGRATULATIONS!!!");
+            }
+            else
+            {
+                Console.WriteLine($"NO MATCHES THIS ROUND!!!");
             }
         }
     }
