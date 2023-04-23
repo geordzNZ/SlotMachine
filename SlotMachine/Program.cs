@@ -1,4 +1,6 @@
-﻿namespace SlotMachine
+﻿using System.Linq;
+
+namespace SlotMachine
 {
     internal class Program
     {
@@ -9,8 +11,8 @@
             // Header section
             Console.Clear();
             Console.WriteLine("\t\t\tWELCOME");
-            Console.WriteLine("\t\tSlot Machine Game");
-            Console.WriteLine($"\t\tWager on 1 or multiple lines");
+            Console.WriteLine("\t\t   Slot Machine Game");
+            Console.WriteLine($"\t    Wager on 1 or multiple lines");
             Console.WriteLine($"{DIVIDER}\n");
 
             // Generate slot grid
@@ -23,10 +25,22 @@
                     Random randomSlot = new Random();
                     int randomSlotValue = randomSlot.Next(4);
                     slotGrid[i, j] = randomSlotValue;
-                    Console.Write($"{randomSlotValue} ");
+                    //Console.Write($"{randomSlotValue} ");
                 }
             }
             Console.WriteLine($"\n\n{DIVIDER}\n\n");
+            // Output slot grid on screen
+            for (int k = 0; k < 3; k++)
+            {
+                string rowDetail = "";
+                for (int l = 0; l < 3; l++)
+                {
+                    rowDetail += slotGrid[k, l];
+                }
+                char[] rowDetailChars = rowDetail.ToArray();
+                //Console.WriteLine($"Row {k} is {String.Join(' ', rowDetailChars)}");
+                Console.WriteLine($"{String.Join(' ', rowDetailChars)}");
+            }
         }
     }
 }
