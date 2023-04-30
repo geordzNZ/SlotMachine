@@ -6,8 +6,11 @@ namespace SlotMachine
     {
         const int SLOTS_MAX_VALUE = 3;
         const int START_MONEY_VALUE = 5;
+        const int GRID_ROWS = 3;
+        const int GRID_COLUMNS = 7;
         const string DIVIDER = "================================================================";
         const string BLANKER = "                                                                ";
+
         static void Main(string[] args)
         {
             // Game set up, defaulted for now, but could be made user input
@@ -23,26 +26,31 @@ namespace SlotMachine
             Console.WriteLine($"{DIVIDER}\n");
 
             // Generate slot grid data
-            int[,] slotGrid = new int[3, 3];
-            
-            for (int i=0; i<3;i++)
+            int[,] slotGrid = new int[GRID_ROWS, GRID_COLUMNS];
+
+            Console.WriteLine($"{slotGrid}");
+            Console.WriteLine($"{slotGrid.GetLength(0)}");
+            Console.WriteLine($"{slotGrid.GetLength(1)}");
+
+
+            for (int generateRowCounter = 0; generateRowCounter < GRID_ROWS; generateRowCounter++)
             {
-                for (int j=0; j<3; j++)
+                for (int generateColumnCounter = 0; generateColumnCounter < GRID_COLUMNS; generateColumnCounter++)
                 {
                     Random randomSlot = new Random();
                     int randomSlotValue = randomSlot.Next(SLOTS_MAX_VALUE);
-                    slotGrid[i, j] = randomSlotValue;
+                    slotGrid[generateRowCounter, generateColumnCounter] = randomSlotValue;
                     //Console.Write($"{randomSlotValue} ");
                 }
             }
 
             // Output slot grid on screen
-            for (int k = 0; k < 3; k++)
+            for (int outputRowCounter = 0; outputRowCounter < GRID_ROWS; outputRowCounter++)
             {
                 string rowDetail = "";
-                for (int l = 0; l < 3; l++)
+                for (int outputColumnCounter = 0; outputColumnCounter < GRID_COLUMNS; outputColumnCounter++)
                 {
-                    rowDetail += slotGrid[k, l];
+                    rowDetail += slotGrid[outputRowCounter, outputColumnCounter];
                 }
                 char[] rowDetailChars = rowDetail.ToArray();
                 //Console.WriteLine($"Row {k} is {String.Join(' ', rowDetailChars)}");
