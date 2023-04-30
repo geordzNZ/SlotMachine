@@ -7,7 +7,7 @@ namespace SlotMachine
         const int SLOTS_MAX_VALUE = 3;
         const int START_MONEY_VALUE = 5;
         const int GRID_ROWS = 3;
-        const int GRID_COLUMNS = 7;
+        const int GRID_COLUMNS = 3;
         const string DIVIDER = "================================================================";
         const string BLANKER = "                                                                ";
 
@@ -27,20 +27,15 @@ namespace SlotMachine
 
             // Generate slot grid data
             int[,] slotGrid = new int[GRID_ROWS, GRID_COLUMNS];
-
-            Console.WriteLine($"{slotGrid}");
-            Console.WriteLine($"{slotGrid.GetLength(0)}");
-            Console.WriteLine($"{slotGrid.GetLength(1)}");
-
+            Random randomSlot = new Random();
 
             for (int generateRowCounter = 0; generateRowCounter < GRID_ROWS; generateRowCounter++)
             {
                 for (int generateColumnCounter = 0; generateColumnCounter < GRID_COLUMNS; generateColumnCounter++)
                 {
-                    Random randomSlot = new Random();
                     int randomSlotValue = randomSlot.Next(SLOTS_MAX_VALUE);
                     slotGrid[generateRowCounter, generateColumnCounter] = randomSlotValue;
-                    //Console.Write($"{randomSlotValue} ");
+                    Console.Write($"{randomSlotValue} ");
                 }
             }
 
