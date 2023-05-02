@@ -10,22 +10,22 @@ namespace SlotMachine
         const int GRID_COLUMNS = 3;
         const string DIVIDER = "==========================================================================";
         const string BLANKER = "                                                                          ";
-
         static void Main(string[] args)
         {
+
+            char[] possibleLineOptions = {'t','m','b','l','c','r','d','u' };
             // Game set up
-            int linesPlayed = 0;
             //int lineStake = 1;
             int geozAmount = START_MONEY_VALUE;
 
             char playAgainAnswer = ' ';
             do
             {
-                // Set up for start of game
+                // Set up and make grid
                 int winCounter = 0;
                 int[,] slotGrid = new int[GRID_ROWS, GRID_COLUMNS];
-                Random randomSlot = new Random();
 
+                Random randomSlot = new Random();
                 for (int generateRowCounter = 0; generateRowCounter < GRID_ROWS; generateRowCounter++)
                 {
                     for (int generateColumnCounter = 0; generateColumnCounter < GRID_COLUMNS; generateColumnCounter++)
@@ -35,149 +35,167 @@ namespace SlotMachine
                     }
                 }
 
+                // Store line representations
+                string topRow = Convert.ToString(slotGrid[0, 0]) + Convert.ToString(slotGrid[0, 1]) + Convert.ToString(slotGrid[0, 2]);
+                string middleRow = Convert.ToString(slotGrid[1, 0]) + Convert.ToString(slotGrid[1, 1]) + Convert.ToString(slotGrid[1, 2]);
+                string bottomRow = Convert.ToString(slotGrid[2, 0]) + Convert.ToString(slotGrid[2, 1]) + Convert.ToString(slotGrid[2, 2]);
+
+                string leftColumn = Convert.ToString(slotGrid[0, 0]) + Convert.ToString(slotGrid[1, 0]) + Convert.ToString(slotGrid[2, 0]);
+                string centreColumn = Convert.ToString(slotGrid[0, 1]) + Convert.ToString(slotGrid[1, 1]) + Convert.ToString(slotGrid[2,1]);
+                string rightColumn = Convert.ToString(slotGrid[0, 2]) + Convert.ToString(slotGrid[1, 2]) + Convert.ToString(slotGrid[2, 2]);
+                
+                string downDiagonal = Convert.ToString(slotGrid[0, 0]) + Convert.ToString(slotGrid[1, 1]) + Convert.ToString(slotGrid[2, 2]);
+                string upDiagonal = Convert.ToString(slotGrid[2, 0]) + Convert.ToString(slotGrid[1, 1]) + Convert.ToString(slotGrid[0, 2]);
+
                 // Output Header section
                 Console.Clear();
                 Console.WriteLine("\t\t\tWELCOME");
                 Console.WriteLine("\t\t   Slot Machine Game");
-                Console.WriteLine($"\tWager on matching lines - 1 geo(g) per line");
 
-                // Option A -- pros, less user input / cons, lots of options
                 Console.WriteLine($"\tGame Control Menu:");
-                Console.WriteLine($"\t\tRows:\t\tt = Top / m = Middle / b = Bottom / h = All horizontals (3g)");
-                Console.WriteLine($"\t\tColumns:\tl = Left / c = Centre / r = Right / v = All verticals (3g)");
-                Console.WriteLine($"\t\tDiagonals:\td = Top Left to bottom Right / u = Both Diagonals (2g)");
+                Console.WriteLine($"\t\tHorizontals:\tt = Top / m = Middle / b = Bottom");
+                Console.WriteLine($"\t\tVerticals:\tl = Left / c = Centre / r = Right");
+                Console.WriteLine($"\t\tDiagonals:\td = Down (Top Left->Bottom Right) / u = Up (Bottom Left->Top Right");
+                Console.WriteLine($"\t\t...ie to play the top / left / down / right lines  ... enter tldr");
+                Console.WriteLine($"\t\tWager on matching lines - 1 geo(g) per line");
                 Console.WriteLine($"{DIVIDER}");
 
-                Console.WriteLine($"\t    You currrently have {geozAmount} geoz");
+                Console.WriteLine($"\t\tYou currrently have {geozAmount} geoz");
                 Console.WriteLine($"{DIVIDER}\n");
 
                 // Game option input and check amount wagered
-                char gameOptionAnswer = ' ';
+                string lineSelectionInput = "";
                 do
                 {
                     Console.WriteLine($"\n\tChoose lines based on game menu above.");
-                    Console.Write($"\tOptions (a/b/c/d): ");
-                    ConsoleKeyInfo gameOptionInput = Console.ReadKey();
-
-                    if ((int)gameOptionInput.KeyChar >= 97 && (int)gameOptionInput.KeyChar <= 100) // a / b / c / d
+                    Console.Write($"\tOptions (t/m/b/l/c/r/d/u): ");
+                    lineSelectionInput = Console.ReadLine();
+                    
+                    // 
+                    if (lineSelectionInput.Length == 0)
                     {
-                        gameOptionAnswer = char.Parse(gameOptionInput.KeyChar.ToString());
-
-                        // Assign lines played
-                        switch (gameOptionAnswer)
-                        {
-                            case 'a':
-                                linesPlayed = 1;
-                                break;
-                            case 'b':
-                                linesPlayed = 3;
-                                break;
-                            case 'c':
-                                linesPlayed = 3;
-                                break;
-                            case 'd':
-                                linesPlayed = 2;
-                                break;
-                        }
-
-                        if (geozAmount < linesPlayed)
-                        {
-                            Console.WriteLine($"\n\t\tNot enough geoz ... choose again!!");
-                            continue;
-                        }
-                        break;
+                        continue;
                     }
-                } while (true);  // Game option input loop
+                    else
+                    {
+                        // TODO: Validation of actual user inputs
+                        //       - Check for invalid choices and remove
+                        //       - Check for duplicate and remove
+                        //       - end up with new string to pass down and use later on
+                    }
 
- 
+                    if (geozAmount < lineSelectionInput.Length)
+                    {
+                        Console.WriteLine($"\n\t\tNot enough geoz ... choose again!!");
+                        continue;
+                    }
+
+                    // All good then exit loop
+                    break;
+
+                } while (true);  // Game option input loop;
+
 
                 // Output slot grid on screen
-                Console.WriteLine($"\n\n\t\tSlot Grid");
-                for (int outputRowCounter = 0; outputRowCounter < GRID_ROWS; outputRowCounter++)
+                Console.WriteLine($"\n\t\tCurrent Spin");
+                Console.Write($"\t\t  {String.Join(' ', topRow.ToCharArray())}\n");
+                Console.Write($"\t\t  {String.Join(' ', middleRow.ToCharArray())}\n");
+                Console.Write($"\t\t  {String.Join(' ', bottomRow.ToCharArray())}\n");
+
+
+                //  Left code below, just in case
+                    //for (int outputRowCounter = 0; outputRowCounter < GRID_ROWS; outputRowCounter++)
+                    //{
+                    //    string rowDetail = "";
+                    //    for (int outputColumnCounter = 0; outputColumnCounter < GRID_COLUMNS; outputColumnCounter++)
+                    //    {
+                    //        rowDetail += slotGrid[outputRowCounter, outputColumnCounter];
+                    //    }
+                    //    char[] rowDetailChars = rowDetail.ToArray();
+                    //    Console.Write($"\t\t  {String.Join(' ', rowDetailChars)}\n");
+                    //}
+
+                // Check for matches
+                bool winState = false;
+
+                foreach (char lineChoice in lineSelectionInput) // t/m/b/l/c/r/d/u
                 {
-                    string rowDetail = "";
-                    for (int outputColumnCounter = 0; outputColumnCounter < GRID_COLUMNS; outputColumnCounter++)
+                    if (lineChoice == 't') 
                     {
-                        rowDetail += slotGrid[outputRowCounter, outputColumnCounter];
-                    }
-                    char[] rowDetailChars = rowDetail.ToArray();
-                    Console.Write($"\t\t  {String.Join(' ', rowDetailChars)}\n");
-                }
-
-                // Check for matches in appropriate rows
-                bool win = false;
-
-                // Row Checking section
-                if (gameOptionAnswer == 'a' || gameOptionAnswer == 'b')
-                {
-                    // Middle row check - option a / b
-                    if (slotGrid[1, 0] == slotGrid[1, 1] && slotGrid[1, 0] == slotGrid[1, 2])
-                    {
-                        win = true;
-                        winCounter++;
-                    }
-
-                    // Other row check - option b
-                    if (gameOptionAnswer == 'b' )
-                    {
-                        // Top row
-                        if (slotGrid[0, 0] == slotGrid[0, 1] && slotGrid[0, 0] == slotGrid[0, 2])
+                        if (topRow[0] == topRow[1] && topRow[0] == topRow[2])
                         {
-                            win = true;
+                            winState = true;
                             winCounter++;
                         }
-
-                        // Bottom row
-                        if (slotGrid[2, 0] == slotGrid[2, 1] && slotGrid[2, 0] == slotGrid[2, 2])
+                        continue;
+                    }
+                    if (lineChoice == 'm')
+                    {
+                        if (middleRow[0] == middleRow[1] && middleRow[0] == middleRow[2])
                         {
-                            win = true;
+                            winState = true;
                             winCounter++;
                         }
+                        continue;
                     }
-                }
-
-                // Column Checking section
-                if (gameOptionAnswer == 'c' )
-                {
-                    // Left column check - option c
-                    if (slotGrid[0, 0] == slotGrid[1, 0] && slotGrid[0, 0] == slotGrid[2, 0])
+                    if (lineChoice == 'b')
                     {
-                        win = true;
-                        winCounter++;
+                        if (bottomRow[0] == bottomRow[1] && bottomRow[0] == bottomRow[2])
+                        {
+                            winState = true;
+                            winCounter++;
+                        }
+                        continue;
                     }
-                    // Centre column check - option c
-                    if (slotGrid[0, 1] == slotGrid[1, 1] && slotGrid[0, 1] == slotGrid[2, 1])
+                    if (lineChoice == 'l')
                     {
-                        win = true;
-                        winCounter++;
+                        if (leftColumn[0] == leftColumn[1] && leftColumn[0] == leftColumn[2])
+                        {
+                            winState = true;
+                            winCounter++;
+                        }
+                        continue;
                     }
-                    // Right column check - option c
-                    if (slotGrid[0, 2] == slotGrid[1, 2] && slotGrid[0, 2] == slotGrid[2, 2])
+                    if (lineChoice == 'c')
                     {
-                        win = true;
-                        winCounter++;
+                        if (centreColumn[0] == centreColumn[1] && centreColumn[0] == centreColumn[2])
+                        {
+                            winState = true;
+                            winCounter++;
+                        }
+                        continue;
                     }
-                }
-
-                // Diagonals Checking section
-                if (gameOptionAnswer == 'd' )
-                {
-                    // Top left to bottom right check - option d
-                    if (slotGrid[0, 0] == slotGrid[1, 1] && slotGrid[0, 0] == slotGrid[2, 2])
+                    if (lineChoice == 'r')
                     {
-                        win = true;
-                        winCounter++;
+                        if (rightColumn[0] == rightColumn[1] && rightColumn[0] == rightColumn[2])
+                        {
+                            winState = true;
+                            winCounter++;
+                        }
+                        continue;
                     }
-                    // Top right to bottom left check - option d
-                    if (slotGrid[0, 2] == slotGrid[1, 1] && slotGrid[0, 2] == slotGrid[2, 0])
+                    if (lineChoice == 'd')
                     {
-                        win = true;
-                        winCounter++;
+                        if (downDiagonal[0] == downDiagonal[1] && downDiagonal[0] == downDiagonal[2])
+                        {
+                            winState = true;
+                            winCounter++;
+                        }
+                        continue;
+                    }
+                    if (lineChoice == 'u')
+                    {
+                        if (upDiagonal[0] == upDiagonal[1] && upDiagonal[0] == upDiagonal[2])
+                        {
+                            winState = true;
+                            winCounter++;
+                        }
+                        continue;
                     }
                 }
 
                 // Output win / loss outcome and sign off
-                if (win)
+                if (winState)
                 {
                     Console.WriteLine($"\n\tWINNER WINNER - CONGRATULATIONS!!!");
                     Console.WriteLine($"\t{winCounter} MATCHED!!!");
@@ -187,7 +205,7 @@ namespace SlotMachine
                     Console.WriteLine($"\n\tNO MATCHES THIS SPIN!!!");
                 }
 
-                Console.WriteLine($"\tYou now have {geozAmount += (-linesPlayed + winCounter)} geos");
+                Console.WriteLine($"\tYou now have {geozAmount += (-lineSelectionInput.Length + winCounter)} geoz");
                 Console.WriteLine($"{DIVIDER}\n");
 
                 // Play again loop
