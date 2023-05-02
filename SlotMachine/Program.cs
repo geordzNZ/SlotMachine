@@ -13,10 +13,10 @@ namespace SlotMachine
 
         static void Main(string[] args)
         {
-            // Game set up, defaulted for now, but could be made user input
+            // Game set up
             int linesPlayed = 0;
             //int lineStake = 1;
-            int moniesAmount = START_MONEY_VALUE;
+            int geozAmount = START_MONEY_VALUE;
 
             char playAgainAnswer = ' ';
             do
@@ -39,16 +39,16 @@ namespace SlotMachine
                 Console.Clear();
                 Console.WriteLine("\t\t\tWELCOME");
                 Console.WriteLine("\t\t   Slot Machine Game");
-                Console.WriteLine($"\tWager on matching lines - 1 monies(m) per line");
+                Console.WriteLine($"\tWager on matching lines - 1 geo(g) per line");
 
                 // Option A -- pros, less user input / cons, lots of options
                 Console.WriteLine($"\tGame Control Menu:");
-                Console.WriteLine($"\t\tRows:\t\ta = Middle row (1m) / b = All rows (3m)");
-                Console.WriteLine($"\t\tColumns:\tc = All columns (3m)");
-                Console.WriteLine($"\t\tDiagonals:\td = Both Diagonals (2m)");
+                Console.WriteLine($"\t\tRows:\t\tt = Top / m = Middle / b = Bottom / h = All horizontals (3g)");
+                Console.WriteLine($"\t\tColumns:\tl = Left / c = Centre / r = Right / v = All verticals (3g)");
+                Console.WriteLine($"\t\tDiagonals:\td = Top Left to bottom Right / u = Both Diagonals (2g)");
                 Console.WriteLine($"{DIVIDER}");
 
-                Console.WriteLine($"\t    You currrently have {moniesAmount} monies");
+                Console.WriteLine($"\t    You currrently have {geozAmount} geoz");
                 Console.WriteLine($"{DIVIDER}\n");
 
                 // Game option input and check amount wagered
@@ -80,9 +80,9 @@ namespace SlotMachine
                                 break;
                         }
 
-                        if (moniesAmount < linesPlayed)
+                        if (geozAmount < linesPlayed)
                         {
-                            Console.WriteLine($"\n\t\tNot enough monies ... choose again!!");
+                            Console.WriteLine($"\n\t\tNot enough geoz ... choose again!!");
                             continue;
                         }
                         break;
@@ -187,7 +187,7 @@ namespace SlotMachine
                     Console.WriteLine($"\n\tNO MATCHES THIS SPIN!!!");
                 }
 
-                Console.WriteLine($"\tYou now have {moniesAmount += (-linesPlayed + winCounter)} monies");
+                Console.WriteLine($"\tYou now have {geozAmount += (-linesPlayed + winCounter)} geos");
                 Console.WriteLine($"{DIVIDER}\n");
 
                 // Play again loop
@@ -203,12 +203,12 @@ namespace SlotMachine
                     }
                 } while (true);  // Play again loop
 
-            } while (playAgainAnswer == 'y' && moniesAmount > 0);  // Game Loop end
+            } while (playAgainAnswer == 'y' && geozAmount > 0);  // Game Loop end
 
             //  Final out put message
-            if (moniesAmount == 0)
+            if (geozAmount == 0)
             {
-                Console.WriteLine($"\n\n\tSorry ... not enough monies for more games ...");
+                Console.WriteLine($"\n\n\tSorry ... not enough geoz for more games ...");
                 Console.WriteLine($"\tCalling the bouncers to escort you out of the building!");
             }
             else
