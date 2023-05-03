@@ -106,15 +106,6 @@ namespace SlotMachine
 
                 } while (true);  // Game option input loop;
 
-                // Adjust geoz amount delete lines cost
-                geozAmount -= lineSelection.Length;
-
-                // Output slot grid on screen
-                Console.WriteLine($"\n\t\tCurrent Spin");
-                Console.Write($"\t\t  {String.Join(' ', topRow.ToCharArray())}\n");
-                Console.Write($"\t\t  {String.Join(' ', middleRow.ToCharArray())}\n");
-                Console.Write($"\t\t  {String.Join(' ', bottomRow.ToCharArray())}\n");
-
                 // Check for matches
                 bool winState = false;
                 foreach (char lineChoice in lineSelection) // t/m/b/l/c/r/d/u
@@ -180,10 +171,19 @@ namespace SlotMachine
                     }  // End switch (lineChoice) ...
                 }  //  End foreach (char lineChoice...
 
-                // Adjust geoz amount to add wins
+                // Adjust geoz amount for lines played and wins
+                geozAmount -= lineSelection.Length;
                 geozAmount += winCounter;
 
-                // Output win / loss outcome and sign off
+
+                // Output section
+                //  - Slot grid on screen
+                Console.WriteLine($"\n\t\tCurrent Spin");
+                Console.Write($"\t\t  {String.Join(' ', topRow.ToCharArray())}\n");
+                Console.Write($"\t\t  {String.Join(' ', middleRow.ToCharArray())}\n");
+                Console.Write($"\t\t  {String.Join(' ', bottomRow.ToCharArray())}\n");
+
+                //  - Output win / loss outcome and sign off
                 if (winState)
                 {
                     Console.WriteLine($"\n\tWINNER WINNER - CONGRATULATIONS!!!");
