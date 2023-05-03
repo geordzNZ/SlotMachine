@@ -50,14 +50,15 @@ namespace SlotMachine
                 // Output Header section
                 Console.Clear();
                 Console.WriteLine("\t\t\tWELCOME");
-                Console.WriteLine("\t\t   Slot Machine Game");
+                Console.WriteLine("\t\t   Slot Machine Game\n");
 
                 Console.WriteLine($"\tGame Control Menu:");
+                Console.WriteLine($"\t  *  Line selection:");
                 Console.WriteLine($"\t\tHorizontals:\tt = Top / m = Middle / b = Bottom");
                 Console.WriteLine($"\t\tVerticals:\tl = Left / c = Centre / r = Right");
                 Console.WriteLine($"\t\tDiagonals:\td = Down (Top Left->Bottom Right) / u = Up (Bottom Left->Top Right");
                 Console.WriteLine($"\t\t...ie to play the top / left / down / right lines  ... enter tldr");
-                Console.WriteLine($"\t\tWager on matching lines - 1 geo(g) per line");
+                Console.WriteLine($"\t  *  Lines cost 1 geo(g) each");
                 Console.WriteLine($"{DIVIDER}");
 
                 Console.WriteLine($"\t\tYou currrently have {geozAmount} geoz");
@@ -67,8 +68,8 @@ namespace SlotMachine
                 string lineSelectionInput = "";
                 do
                 {
-                    Console.WriteLine($"\n\tChoose lines based on game menu above.");
-                    Console.Write($"\tOptions (t/m/b/l/c/r/d/u): ");
+                    Console.WriteLine($"\n\tChoose lines based on Game Control Menu above.");
+                    Console.Write($"\tLine selection: ");
                     lineSelectionInput = Console.ReadLine();
                     
                     // 
