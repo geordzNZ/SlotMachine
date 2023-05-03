@@ -96,6 +96,8 @@ namespace SlotMachine
 
                 } while (true);  // Game option input loop;
 
+                // Adjust geoz amount delete lines cost
+                geozAmount -= lineSelectionInput.Length;
 
                 // Output slot grid on screen
                 Console.WriteLine($"\n\t\tCurrent Spin");
@@ -182,6 +184,9 @@ namespace SlotMachine
                     }  // End switch (lineChoice)
                 }  //  End foreach (char lineChoice
 
+                // Adjust geoz amount to add wins
+                geozAmount += winCounter;
+
                 // Output win / loss outcome and sign off
                 if (winState)
                 {
@@ -192,9 +197,6 @@ namespace SlotMachine
                 {
                     Console.WriteLine($"\n\tNO MATCHES THIS SPIN!!!");
                 }
-
-                geozAmount -= lineSelectionInput.Length;
-                geozAmount += winCounter;
 
                 Console.WriteLine($"\tYou now have {geozAmount} geoz");
                 Console.WriteLine($"{DIVIDER}\n");
