@@ -193,7 +193,10 @@ namespace SlotMachine
                     Console.WriteLine($"\n\tNO MATCHES THIS SPIN!!!");
                 }
 
-                Console.WriteLine($"\tYou now have {geozAmount += (-lineSelectionInput.Length + winCounter)} geoz");
+                geozAmount -= lineSelectionInput.Length;
+                geozAmount += winCounter;
+
+                Console.WriteLine($"\tYou now have {geozAmount} geoz");
                 Console.WriteLine($"{DIVIDER}\n");
 
                 // Play again loop
