@@ -121,79 +121,66 @@ namespace SlotMachine
 
                 foreach (char lineChoice in lineSelectionInput) // t/m/b/l/c/r/d/u
                 {
-                    if (lineChoice == 't') 
+                    switch (lineChoice)
                     {
-                        if (topRow[0] == topRow[1] && topRow[0] == topRow[2])
-                        {
-                            winState = true;
-                            winCounter++;
-                        }
-                        continue;
-                    }
-                    if (lineChoice == 'm')
-                    {
-                        if (middleRow[0] == middleRow[1] && middleRow[0] == middleRow[2])
-                        {
-                            winState = true;
-                            winCounter++;
-                        }
-                        continue;
-                    }
-                    if (lineChoice == 'b')
-                    {
-                        if (bottomRow[0] == bottomRow[1] && bottomRow[0] == bottomRow[2])
-                        {
-                            winState = true;
-                            winCounter++;
-                        }
-                        continue;
-                    }
-                    if (lineChoice == 'l')
-                    {
-                        if (leftColumn[0] == leftColumn[1] && leftColumn[0] == leftColumn[2])
-                        {
-                            winState = true;
-                            winCounter++;
-                        }
-                        continue;
-                    }
-                    if (lineChoice == 'c')
-                    {
-                        if (centreColumn[0] == centreColumn[1] && centreColumn[0] == centreColumn[2])
-                        {
-                            winState = true;
-                            winCounter++;
-                        }
-                        continue;
-                    }
-                    if (lineChoice == 'r')
-                    {
-                        if (rightColumn[0] == rightColumn[1] && rightColumn[0] == rightColumn[2])
-                        {
-                            winState = true;
-                            winCounter++;
-                        }
-                        continue;
-                    }
-                    if (lineChoice == 'd')
-                    {
-                        if (downDiagonal[0] == downDiagonal[1] && downDiagonal[0] == downDiagonal[2])
-                        {
-                            winState = true;
-                            winCounter++;
-                        }
-                        continue;
-                    }
-                    if (lineChoice == 'u')
-                    {
-                        if (upDiagonal[0] == upDiagonal[1] && upDiagonal[0] == upDiagonal[2])
-                        {
-                            winState = true;
-                            winCounter++;
-                        }
-                        continue;
-                    }
-                }
+                        case 't':
+                            if (topRow[0] == topRow[1] && topRow[0] == topRow[2])
+                            {
+                                winState = true;
+                                winCounter++;
+                            }
+                            break;
+                        case 'm':
+                            if (middleRow[0] == middleRow[1] && middleRow[0] == middleRow[2])
+                            {
+                                winState = true;
+                                winCounter++;
+                            }
+                            break;
+                        case 'b':
+                            if (bottomRow[0] == bottomRow[1] && bottomRow[0] == bottomRow[2])
+                            {
+                                winState = true;
+                                winCounter++;
+                            }
+                            break;
+                        case 'l':
+                            if (leftColumn[0] == leftColumn[1] && leftColumn[0] == leftColumn[2])
+                            {
+                                winState = true;
+                                winCounter++;
+                            }
+                            break;
+                        case 'c':
+                            if (centreColumn[0] == centreColumn[1] && centreColumn[0] == centreColumn[2])
+                            {
+                                winState = true;
+                                winCounter++;
+                            }
+                            break;
+                        case 'r':
+                            if (rightColumn[0] == rightColumn[1] && rightColumn[0] == rightColumn[2])
+                            {
+                                winState = true;
+                                winCounter++;
+                            }
+                            break;
+                        case 'd':
+                            if (downDiagonal[0] == downDiagonal[1] && downDiagonal[0] == downDiagonal[2])
+                            {
+                                winState = true;
+                                winCounter++;
+                            }
+                            break;
+                        case 'u':
+                            if (upDiagonal[0] == upDiagonal[1] && upDiagonal[0] == upDiagonal[2])
+                            {
+                                winState = true;
+                                winCounter++;
+                            }
+                            break;
+                    }  // End switch (lineChoice)
+                }  //  End foreach (char lineChoice
 
                 // Output win / loss outcome and sign off
                 if (winState)
