@@ -5,7 +5,7 @@ namespace SlotMachine
     internal class Program
     {
         const int SLOTS_MAX_VALUE = 3;
-        const int START_MONEY_VALUE = 5;
+        const int START_MONEY_VALUE = 15;
         const int GRID_ROWS = 3;
         const int GRID_COLUMNS = 3;
         const string DIVIDER = "==========================================================================";
@@ -13,7 +13,7 @@ namespace SlotMachine
         static void Main(string[] args)
         {
 
-            char[] possibleLineOptions = {'t','m','b','l','c','r','d','u' };
+            string possibleLineOptions = "tmblcrdu";
             // Game set up
             //int lineStake = 1;
             int geozAmount = START_MONEY_VALUE;
@@ -66,28 +66,38 @@ namespace SlotMachine
 
                 // Game option input and check amount wagered
                 string lineSelectionInput = "";
+                string lineSelection = "";
                 do
                 {
                     Console.WriteLine($"\n\tChoose lines based on Game Control Menu above.");
                     Console.Write($"\tLine selection: ");
                     lineSelectionInput = Console.ReadLine();
                     
-                    // 
+                    // Validation of user inputs
                     if (lineSelectionInput.Length == 0)
                     {
                         continue;
                     }
                     else
                     {
-                        // TODO: Validation of actual user inputs
-                        //       - Check for invalid choices and remove
-                        //       - Check for duplicate and remove
-                        //       - end up with new string to pass down and use later on
+                        foreach (char lineInput in lineSelectionInput)
+                        {
+                            Console.WriteLine($"Input char is {lineInput}");
+                            if (possibleLineOptions.Contains(lineInput))
+                            {
+                                if (!lineSelection.Contains(lineInput))
+                                {
+                                    lineSelection += lineInput;
+                                }
+                            }
+                        }
                     }
 
-                    if (geozAmount < lineSelectionInput.Length)
+                    // Confirm enough geoz to cover validated line choices
+                    if (geozAmount < lineSelection.Length)
                     {
-                        Console.WriteLine($"\n\t\tNot enough geoz ... choose again!!");
+                        Console.WriteLine($"\n\t\tNot enough geoz ... choose upto {geozAmount} lines!");
+                        lineSelection = "";
                         continue;
                     }
 
@@ -97,7 +107,7 @@ namespace SlotMachine
                 } while (true);  // Game option input loop;
 
                 // Adjust geoz amount delete lines cost
-                geozAmount -= lineSelectionInput.Length;
+                geozAmount -= lineSelection.Length;
 
                 // Output slot grid on screen
                 Console.WriteLine($"\n\t\tCurrent Spin");
@@ -105,23 +115,9 @@ namespace SlotMachine
                 Console.Write($"\t\t  {String.Join(' ', middleRow.ToCharArray())}\n");
                 Console.Write($"\t\t  {String.Join(' ', bottomRow.ToCharArray())}\n");
 
-
-                //  Left code below, just in case
-                    //for (int outputRowCounter = 0; outputRowCounter < GRID_ROWS; outputRowCounter++)
-                    //{
-                    //    string rowDetail = "";
-                    //    for (int outputColumnCounter = 0; outputColumnCounter < GRID_COLUMNS; outputColumnCounter++)
-                    //    {
-                    //        rowDetail += slotGrid[outputRowCounter, outputColumnCounter];
-                    //    }
-                    //    char[] rowDetailChars = rowDetail.ToArray();
-                    //    Console.Write($"\t\t  {String.Join(' ', rowDetailChars)}\n");
-                    //}
-
                 // Check for matches
                 bool winState = false;
-
-                foreach (char lineChoice in lineSelectionInput) // t/m/b/l/c/r/d/u
+                foreach (char lineChoice in lineSelection) // t/m/b/l/c/r/d/u
                 {
                     switch (lineChoice)
                     {
@@ -181,8 +177,8 @@ namespace SlotMachine
                                 winCounter++;
                             }
                             break;
-                    }  // End switch (lineChoice)
-                }  //  End foreach (char lineChoice
+                    }  // End switch (lineChoice) ...
+                }  //  End foreach (char lineChoice...
 
                 // Adjust geoz amount to add wins
                 geozAmount += winCounter;
