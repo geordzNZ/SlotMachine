@@ -6,6 +6,7 @@ namespace SlotMachine
     {
         const int SLOTS_MAX_VALUE = 3;
         const int START_MONEY_VALUE = 15;
+        const int WIN_AMOUNT = 2;
         const int GRID_ROWS = 3;
         const int GRID_COLUMNS = 3;
         const string DIVIDER = "==========================================================================";
@@ -16,7 +17,6 @@ namespace SlotMachine
         {
 
             // Game set up
-            //int lineStake = 1;
             int geozAmount = START_MONEY_VALUE;
 
             char playAgainAnswer = ' ';
@@ -53,13 +53,19 @@ namespace SlotMachine
                 Console.WriteLine("\t\t\tWELCOME");
                 Console.WriteLine("\t\t   Slot Machine Game\n");
 
-                Console.WriteLine($"\tGame Control Menu:");
-                Console.WriteLine($"\t  *  Line selection:");
+                Console.WriteLine($"\tInstructions:");
+                Console.WriteLine($"\t   * Line selection menu:");
                 Console.WriteLine($"\t\tHorizontals:\tt = Top / m = Middle / b = Bottom");
                 Console.WriteLine($"\t\tVerticals:\tl = Left / c = Centre / r = Right");
-                Console.WriteLine($"\t\tDiagonals:\td = Down (Top Left->Bottom Right) / u = Up (Bottom Left->Top Right");
+                Console.WriteLine($"\t\tDiagonals:\td = Down (Top Left->Bottom Right) / u = Up (Bottom Left->Top Right)");
                 Console.WriteLine($"\t\t...ie to play the top / left / down / right lines  ... enter tldr");
-                Console.WriteLine($"\t  *  Lines cost 1 geo(g) each");
+                Console.WriteLine($"\tCosts and Winnings");
+                Console.WriteLine($"\t   * Lines cost 1 geo(g) each");
+                Console.WriteLine($"\t\t...ie tldr = 4 lines ... costs 4 geoz");
+                Console.WriteLine($"\t   * Winning Lines pay out 2 geoz(g) each");
+                Console.WriteLine($"\t\t...ie td = 2 matching lines ... pays out 4 geoz");
+                Console.WriteLine($"\t   * BONUS pay out if ALL lines you play win, pays out your initial wager");
+                Console.WriteLine($"\t\t...ie tldr = 4 lines ... pays out your initial 4 geoz wager");
                 Console.WriteLine($"{DIVIDER}");
 
                 Console.WriteLine($"\t\tYou currrently have {geozAmount} geoz");
@@ -83,7 +89,7 @@ namespace SlotMachine
                     {
                         foreach (char lineInput in lineSelectionInput)
                         {
-                            Console.WriteLine($"Input char is {lineInput}");
+                            //Console.WriteLine($"Input char is {lineInput}");
                             if (POSSIBLE_LINE_OPTIONS.Contains(lineInput))
                             {
                                 if (!lineSelection.Contains(lineInput))
@@ -166,9 +172,16 @@ namespace SlotMachine
                     }  // End switch (lineChoice) ...
                 }  //  End foreach (char lineChoice...
 
-                // Adjust geoz amount for wins
-                geozAmount += winCounter;
+                // Adjust geoz amount for wins (and bonus if applicable)
+                if (winCounter > 0)
+                {
+                    geozAmount += (winCounter * WIN_AMOUNT);
 
+                    if (winCounter == lineSelection.Length)
+                    {
+                        geozAmount += winCounter;
+                    }
+                }
 
                 // Output section
                 //  - Slot grid on screen
