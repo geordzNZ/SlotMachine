@@ -10,10 +10,11 @@ namespace SlotMachine
         const int GRID_COLUMNS = 3;
         const string DIVIDER = "==========================================================================";
         const string BLANKER = "                                                                          ";
+        const string POSSIBLE_LINE_OPTIONS = "tmblcrdu";
+
         static void Main(string[] args)
         {
 
-            string possibleLineOptions = "tmblcrdu";
             // Game set up
             //int lineStake = 1;
             int geozAmount = START_MONEY_VALUE;
@@ -83,7 +84,7 @@ namespace SlotMachine
                         foreach (char lineInput in lineSelectionInput)
                         {
                             Console.WriteLine($"Input char is {lineInput}");
-                            if (possibleLineOptions.Contains(lineInput))
+                            if (POSSIBLE_LINE_OPTIONS.Contains(lineInput))
                             {
                                 if (!lineSelection.Contains(lineInput))
                                 {
