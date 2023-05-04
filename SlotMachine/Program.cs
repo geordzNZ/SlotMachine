@@ -76,28 +76,26 @@ namespace SlotMachine
                 string lineSelection = "";
                 do
                 {
-                    Console.WriteLine($"\n\tChoose lines based on Game Control Menu above.");
+                    Console.WriteLine($"\tChoose lines based on Game Control Menu above...");
                     Console.Write($"\tLine selection: ");
                     lineSelectionInput = Console.ReadLine();
-                    
+
                     // Validation of user inputs
-                    if (lineSelectionInput.Length == 0)
+                    foreach (char lineInput in lineSelectionInput)
                     {
-                        continue;
-                    }
-                    else
-                    {
-                        foreach (char lineInput in lineSelectionInput)
+                        if (POSSIBLE_LINE_OPTIONS.Contains(lineInput))
                         {
-                            //Console.WriteLine($"Input char is {lineInput}");
-                            if (POSSIBLE_LINE_OPTIONS.Contains(lineInput))
+                            if (!lineSelection.Contains(lineInput))
                             {
-                                if (!lineSelection.Contains(lineInput))
-                                {
-                                    lineSelection += lineInput;
-                                }
+                                lineSelection += lineInput;
                             }
                         }
+                    }
+
+                    // Exit if no valid line chocies
+                    if (lineSelection.Length == 0)
+                    {
+                        continue;
                     }
 
                     // Confirm enough geoz to cover validated line choices
