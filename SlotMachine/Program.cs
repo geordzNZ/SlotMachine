@@ -72,13 +72,12 @@ namespace SlotMachine
                 Console.WriteLine($"{DIVIDER}\n");
 
                 // Game option input and check amount wagered
-                string lineSelectionInput = "";
                 string lineSelection = "";
                 do
                 {
                     Console.WriteLine($"\tChoose lines based on Game Control Menu above...");
                     Console.Write($"\tLine selection: ");
-                    lineSelectionInput = Console.ReadLine();
+                    string lineSelectionInput = Console.ReadLine();
 
                     // Validation of user inputs
                     foreach (char lineInput in lineSelectionInput)
