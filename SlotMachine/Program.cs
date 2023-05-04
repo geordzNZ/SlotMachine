@@ -111,7 +111,6 @@ namespace SlotMachine
                 geozAmount -= lineSelection.Length;
 
                 // Check for matches
-                bool winState = false;
                 foreach (char lineChoice in lineSelection) // t/m/b/l/c/r/d/u
                 {
                     switch (lineChoice)
@@ -119,56 +118,48 @@ namespace SlotMachine
                         case 't':
                             if (topRow[0] == topRow[1] && topRow[0] == topRow[2])
                             {
-                                winState = true;
                                 winCounter++;
                             }
                             break;
                         case 'm':
                             if (middleRow[0] == middleRow[1] && middleRow[0] == middleRow[2])
                             {
-                                winState = true;
                                 winCounter++;
                             }
                             break;
                         case 'b':
                             if (bottomRow[0] == bottomRow[1] && bottomRow[0] == bottomRow[2])
                             {
-                                winState = true;
                                 winCounter++;
                             }
                             break;
                         case 'l':
                             if (leftColumn[0] == leftColumn[1] && leftColumn[0] == leftColumn[2])
                             {
-                                winState = true;
                                 winCounter++;
                             }
                             break;
                         case 'c':
                             if (centreColumn[0] == centreColumn[1] && centreColumn[0] == centreColumn[2])
                             {
-                                winState = true;
                                 winCounter++;
                             }
                             break;
                         case 'r':
                             if (rightColumn[0] == rightColumn[1] && rightColumn[0] == rightColumn[2])
                             {
-                                winState = true;
                                 winCounter++;
                             }
                             break;
                         case 'd':
                             if (downDiagonal[0] == downDiagonal[1] && downDiagonal[0] == downDiagonal[2])
                             {
-                                winState = true;
                                 winCounter++;
                             }
                             break;
                         case 'u':
                             if (upDiagonal[0] == upDiagonal[1] && upDiagonal[0] == upDiagonal[2])
                             {
-                                winState = true;
                                 winCounter++;
                             }
                             break;
@@ -187,7 +178,7 @@ namespace SlotMachine
                 Console.Write($"\t\t  {String.Join(' ', bottomRow.ToCharArray())}\n");
 
                 //  - Output win / loss outcome and sign off
-                if (winState)
+                if (winCounter > 0)
                 {
                     Console.WriteLine($"\n\tWINNER WINNER - CONGRATULATIONS!!!");
                     Console.WriteLine($"\t{winCounter} MATCHED!!!");
