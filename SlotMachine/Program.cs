@@ -27,12 +27,12 @@ namespace SlotMachine
                 int[,] slotGrid = new int[GRID_ROWS, GRID_COLUMNS];
 
                 Random randomSlot = new Random();
-                for (int generateRowCounter = 0; generateRowCounter < GRID_ROWS; generateRowCounter++)
+                for (int row = 0; row < GRID_ROWS; row++)
                 {
-                    for (int generateColumnCounter = 0; generateColumnCounter < GRID_COLUMNS; generateColumnCounter++)
+                    for (int col = 0; col < GRID_COLUMNS; col++)
                     {
                         int randomSlotValue = randomSlot.Next(SLOTS_MAX_VALUE);
-                        slotGrid[generateRowCounter, generateColumnCounter] = randomSlotValue;
+                        slotGrid[row, col] = randomSlotValue;
                     }
                 }
 
