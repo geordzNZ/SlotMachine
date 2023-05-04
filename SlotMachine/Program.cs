@@ -107,6 +107,9 @@ namespace SlotMachine
 
                 } while (true);  // Game option input loop;
 
+                // Adjust geoz amount for lines played
+                geozAmount -= lineSelection.Length;
+
                 // Check for matches
                 bool winState = false;
                 foreach (char lineChoice in lineSelection) // t/m/b/l/c/r/d/u
@@ -172,8 +175,7 @@ namespace SlotMachine
                     }  // End switch (lineChoice) ...
                 }  //  End foreach (char lineChoice...
 
-                // Adjust geoz amount for lines played and wins
-                geozAmount -= lineSelection.Length;
+                // Adjust geoz amount for wins
                 geozAmount += winCounter;
 
 
