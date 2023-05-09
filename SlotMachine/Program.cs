@@ -104,49 +104,49 @@ namespace SlotMachine
                     switch (lineChoice)
                     {
                         case 't':
-                            if (topRow[0] == topRow[1] && topRow[0] == topRow[2])
+                            if (isLineWin(topRow))
                             {
                                 winCounter++;
                             }
                             break;
                         case 'm':
-                            if (middleRow[0] == middleRow[1] && middleRow[0] == middleRow[2])
+                            if (isLineWin(middleRow))
                             {
                                 winCounter++;
                             }
                             break;
                         case 'b':
-                            if (bottomRow[0] == bottomRow[1] && bottomRow[0] == bottomRow[2])
+                            if (isLineWin(bottomRow))
                             {
                                 winCounter++;
                             }
                             break;
                         case 'l':
-                            if (leftColumn[0] == leftColumn[1] && leftColumn[0] == leftColumn[2])
+                            if (isLineWin(leftColumn))
                             {
                                 winCounter++;
                             }
                             break;
                         case 'c':
-                            if (centreColumn[0] == centreColumn[1] && centreColumn[0] == centreColumn[2])
+                            if (isLineWin(centreColumn))
                             {
                                 winCounter++;
                             }
                             break;
                         case 'r':
-                            if (rightColumn[0] == rightColumn[1] && rightColumn[0] == rightColumn[2])
+                            if (isLineWin(rightColumn))
                             {
                                 winCounter++;
                             }
                             break;
                         case 'd':
-                            if (downDiagonal[0] == downDiagonal[1] && downDiagonal[0] == downDiagonal[2])
+                            if (isLineWin(downDiagonal))
                             {
                                 winCounter++;
                             }
                             break;
                         case 'u':
-                            if (upDiagonal[0] == upDiagonal[1] && upDiagonal[0] == upDiagonal[2])
+                            if (isLineWin(upDiagonal))
                             {
                                 winCounter++;
                             }
