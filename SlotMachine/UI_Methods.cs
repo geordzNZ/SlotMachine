@@ -10,6 +10,8 @@ namespace SlotMachine
     public static class UI_Methods
     {
         const string DIVIDER = "==========================================================================";
+        const string BLANKER = "                                                                          ";
+
         public static void DisplayHeader()
         {
             Console.Clear();
@@ -37,8 +39,60 @@ namespace SlotMachine
 
         public static void DisplayCurrentGeoz(int geozAmount)
         {
-            Console.WriteLine($"\t\tYou currrently have {geozAmount} geoz");
+            Console.WriteLine($"\t\tYou have {geozAmount} geoz");
             Console.WriteLine($"{DIVIDER}\n");
+        }
+
+        public static string GetLineSelection()
+        {
+            Console.WriteLine($"\tChoose lines based on Game Control Menu above...");
+            Console.Write($"\tLine selection: ");
+            string lineSelectionInput = Console.ReadLine();
+
+            return lineSelectionInput;
+        }
+
+
+        public static void DisplaySlotGrid(string topRow, string middleRow, string bottomRow)
+        {
+            Console.WriteLine($"\n\t\tCurrent Spin");
+            Console.Write($"\t\t  {String.Join(' ', topRow.ToCharArray())}\n");
+            Console.Write($"\t\t  {String.Join(' ', middleRow.ToCharArray())}\n");
+            Console.Write($"\t\t  {String.Join(' ', bottomRow.ToCharArray())}\n");
+        }
+
+
+        public static void DisplayMatchesMessage(int wins)
+        {
+            Console.WriteLine($"\n\tWINNER WINNER - CONGRATULATIONS!!!");
+            Console.WriteLine($"\t{wins} MATCHED!!!");
+        }
+
+        public static void DisplayNoMatchesMessage()
+        {
+            Console.WriteLine($"\n\tNO MATCHES THIS SPIN!!!");
+
+        }
+
+
+        public static ConsoleKeyInfo GetYesNoAnswer(string userPrompt)
+        {
+            Console.Write($"\n\t{userPrompt} (y/n): ");
+            ConsoleKeyInfo playAgainInput = Console.ReadKey();
+            return playAgainInput;
+        }
+
+
+        public static void DisplayInsufficientGeoz(int geoz)
+        {
+            Console.WriteLine($"\n\t\tNot enough geoz ... choose upto {geoz} lines!");
+        }
+
+        public static void DisplayLeavingMessage(string msg1, string msg2)
+        {
+            Console.WriteLine($"\n\n\t{msg1}");
+            Console.WriteLine($"\t{msg2}");
+            Console.WriteLine($"\n{DIVIDER}\n");
         }
     }
 }

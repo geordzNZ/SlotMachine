@@ -12,8 +12,6 @@ namespace SlotMachine
         const int WIN_AMOUNT = 2;
         const int GRID_ROWS = 3;
         const int GRID_COLUMNS = 3;
-        const string DIVIDER = "==========================================================================";
-        const string BLANKER = "                                                                          ";
         const string POSSIBLE_LINE_OPTIONS = "tmblcrdu";
 
         static void Main(string[] args)
@@ -60,9 +58,8 @@ namespace SlotMachine
                 string lineSelection = "";
                 do
                 {
-                    Console.WriteLine($"\tChoose lines based on Game Control Menu above...");
-                    Console.Write($"\tLine selection: ");
-                    string lineSelectionInput = Console.ReadLine();
+                    // Get line selection from user
+                    string lineSelectionInput = UI_Methods.GetLineSelection();
 
                     // Validation of user inputs
                     foreach (char lineInput in lineSelectionInput)
@@ -85,7 +82,7 @@ namespace SlotMachine
                     // Confirm enough geoz to cover validated line choices
                     if (geozAmount < lineSelection.Length)
                     {
-                        Console.WriteLine($"\n\t\tNot enough geoz ... choose upto {geozAmount} lines!");
+                        UI_Methods.DisplayInsufficientGeoz(geozAmount);
                         lineSelection = "";
                         continue;
                     }
@@ -143,30 +140,27 @@ namespace SlotMachine
 
                 // Output section
                 //  - Slot grid on screen
-                Console.WriteLine($"\n\t\tCurrent Spin");
-                Console.Write($"\t\t  {String.Join(' ', topRow.ToCharArray())}\n");
-                Console.Write($"\t\t  {String.Join(' ', middleRow.ToCharArray())}\n");
-                Console.Write($"\t\t  {String.Join(' ', bottomRow.ToCharArray())}\n");
+                UI_Methods.DisplaySlotGrid(topRow,middleRow,bottomRow);
+
 
                 //  - Output win / loss outcome and sign off
                 if (winCounter > 0)
                 {
-                    Console.WriteLine($"\n\tWINNER WINNER - CONGRATULATIONS!!!");
-                    Console.WriteLine($"\t{winCounter} MATCHED!!!");
+                    UI_Methods.DisplayMatchesMessage(winCounter);
                 }
                 else
                 {
-                    Console.WriteLine($"\n\tNO MATCHES THIS SPIN!!!");
+                    UI_Methods.DisplayNoMatchesMessage();
                 }
 
-                Console.WriteLine($"\tYou now have {geozAmount} geoz");
-                Console.WriteLine($"{DIVIDER}\n");
+                UI_Methods.DisplayCurrentGeoz(geozAmount);
+
 
                 // Play again loop
                 do
                 {
-                    Console.Write($"\n\tDo you what to play again? (y/n): ");
-                    ConsoleKeyInfo playAgainInput = Console.ReadKey();
+                    // Get user input
+                    ConsoleKeyInfo playAgainInput = UI_Methods.GetYesNoAnswer("Do you what to play again?");
 
                     if ((int)playAgainInput.KeyChar == 110 || (int)playAgainInput.KeyChar == 121) // only allow - n or y
                     {
@@ -174,21 +168,21 @@ namespace SlotMachine
                         break;
                     }
                 } while (true);  // Play again loop
-
             } while (playAgainAnswer == 'y' && geozAmount > 0);  // Game Loop end
 
             //  Final out put message
             if (geozAmount == 0)
             {
-                Console.WriteLine($"\n\n\tSorry ... not enough geoz for more games ...");
-                Console.WriteLine($"\tCalling the bouncers to escort you out of the building!");
+                string msgLoss1 = "Sorry ... not enough geoz for more games ...";
+                string msgLoss2 = "Calling the bouncers to escort you out of the building!";
+                UI_Methods.DisplayLeavingMessage(msgLoss1, msgLoss2);
             }
             else
             {
-                Console.WriteLine($"\n\n\tDont forget to pick up all your winnings ...");
-                Console.WriteLine($"\tThanks for playing, see you real soon!!");
+                string msgWin1 = "Dont forget to pick up all your winnings ...";
+                string msgWin2 = "Thanks for playing, see you real soon!!";
+                UI_Methods.DisplayLeavingMessage(msgWin1, msgWin2);
             }
-            Console.WriteLine($"{DIVIDER}\n");
         }
 
         ///// <summary>
@@ -202,7 +196,11 @@ namespace SlotMachine
         //    return winningLine;
         //}
 
-
+        /// <summary>
+        /// Takes line input, check if all match
+        /// </summary>
+        /// <param name="lineToCheck">The line to be checked, as a string</param>
+        /// <returns>Returns 1 if matching, to indicate winning line, 0 is losing line</returns>
         static int lineWinnings(string lineToCheck)
         {
             if (lineToCheck[0] == lineToCheck[1] && lineToCheck[0] == lineToCheck[2])
