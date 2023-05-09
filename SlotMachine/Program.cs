@@ -104,52 +104,28 @@ namespace SlotMachine
                     switch (lineChoice)
                     {
                         case 't':
-                            if (isLineWin(topRow))
-                            {
-                                winCounter++;
-                            }
+                            winCounter += lineWinnings(topRow);
                             break;
                         case 'm':
-                            if (isLineWin(middleRow))
-                            {
-                                winCounter++;
-                            }
+                            winCounter += lineWinnings(middleRow);
                             break;
                         case 'b':
-                            if (isLineWin(bottomRow))
-                            {
-                                winCounter++;
-                            }
+                            winCounter += lineWinnings(bottomRow);
                             break;
                         case 'l':
-                            if (isLineWin(leftColumn))
-                            {
-                                winCounter++;
-                            }
+                            winCounter += lineWinnings(leftColumn);
                             break;
                         case 'c':
-                            if (isLineWin(centreColumn))
-                            {
-                                winCounter++;
-                            }
+                            winCounter += lineWinnings(centreColumn);
                             break;
                         case 'r':
-                            if (isLineWin(rightColumn))
-                            {
-                                winCounter++;
-                            }
+                            winCounter += lineWinnings(rightColumn);
                             break;
                         case 'd':
-                            if (isLineWin(downDiagonal))
-                            {
-                                winCounter++;
-                            }
+                            winCounter += lineWinnings(downDiagonal);
                             break;
                         case 'u':
-                            if (isLineWin(upDiagonal))
-                            {
-                                winCounter++;
-                            }
+                            winCounter += lineWinnings(upDiagonal);
                             break;
                     }  // End switch (lineChoice) ...
                 }  //  End foreach (char lineChoice...
@@ -215,15 +191,25 @@ namespace SlotMachine
             Console.WriteLine($"{DIVIDER}\n");
         }
 
-        /// <summary>
-        /// Checks the line string for matches
-        /// </summary>
-        /// <param name="lineToCheck">The line to be cheched, as a string</param>
-        /// <returns>bool value to indicate matching line or not</returns>
-        static bool isLineWin(string lineToCheck)
+        ///// <summary>
+        ///// Checks the line string for matches
+        ///// </summary>
+        ///// <param name="lineToCheck">The line to be cheched, as a string</param>
+        ///// <returns>bool value to indicate matching line or not</returns>
+        //static bool isLineWin(string lineToCheck)
+        //{
+        //    bool winningLine = (lineToCheck[0] == lineToCheck[1] && lineToCheck[0] == lineToCheck[2]);
+        //    return winningLine;
+        //}
+
+
+        static int lineWinnings(string lineToCheck)
         {
-            bool winningLine = (lineToCheck[0] == lineToCheck[1] && lineToCheck[0] == lineToCheck[2]);
-            return winningLine;
-        }
+            if (lineToCheck[0] == lineToCheck[1] && lineToCheck[0] == lineToCheck[2])
+            {
+                return 1;
+            }
+            return 0;
+         }
     }
 }
