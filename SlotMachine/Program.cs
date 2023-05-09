@@ -152,7 +152,6 @@ namespace SlotMachine
                 {
                     UI_Methods.DisplayNoMatchesMessage();
                 }
-
                 UI_Methods.DisplayCurrentGeoz(geozAmount);
 
 
