@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SlotMachine
 {
-    public static class UI_Methods
+    public static class UIMethods
     {
         const string DIVIDER = "==========================================================================";
         const string BLANKER = "                                                                          ";
@@ -91,7 +91,7 @@ namespace SlotMachine
                 // Confirm enough geoz to cover validated line choices
                 if (geoz < lineSelection.Length)
                 {
-                    UI_Methods.DisplayInsufficientGeoz(geoz);
+                    UIMethods.DisplayInsufficientGeoz(geoz);
                     lineSelection = "";
                     continue;
                 }
@@ -140,10 +140,9 @@ namespace SlotMachine
         }
 
         /// <summary>
-        /// Used to get y /n  inputs from user, based on promt
+        /// Gets user input to play again and validates answer
         /// </summary>
-        /// <param name="userPrompt">Text used to nudge user for an answer</param>
-        /// <returns>ConsoleKeyInfo value to be validated</returns>
+        /// <returns>validated answer as a char</returns>
         public static char GetPlayAgainAnswer()
         {
             char playAgainAnswer = ' ';

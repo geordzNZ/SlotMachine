@@ -49,12 +49,12 @@ namespace SlotMachine
                 string upDiagonal = Convert.ToString(slotGrid[2, 0]) + Convert.ToString(slotGrid[1, 1]) + Convert.ToString(slotGrid[0, 2]);
 
                 // Output Header section
-                UI_Methods.DisplayHeader();
-                UI_Methods.DisplayInstructions();
-                UI_Methods.DisplayCurrentGeoz(geozAmount);
+                UIMethods.DisplayHeader();
+                UIMethods.DisplayInstructions();
+                UIMethods.DisplayCurrentGeoz(geozAmount);
 
                 // Game option input and check amount wagered
-                string lineSelection = UI_Methods.GetLineSelection(geozAmount);
+                string lineSelection = UIMethods.GetLineSelection(geozAmount);
 
                 // Adjust geoz amount for lines played
                 geozAmount -= lineSelection.Length;
@@ -104,33 +104,22 @@ namespace SlotMachine
 
                 // Output section
                 //  - Slot grid on screen
-                UI_Methods.DisplaySlotGrid(topRow,middleRow,bottomRow);
+                UIMethods.DisplaySlotGrid(topRow,middleRow,bottomRow);
 
 
                 //  - Output win / loss outcome and current geoz
-                UI_Methods.DisplayMatchesMessage(winCounter);
-                UI_Methods.DisplayCurrentGeoz(geozAmount);
+                UIMethods.DisplayMatchesMessage(winCounter);
+                UIMethods.DisplayCurrentGeoz(geozAmount);
 
 
                 // Play again user input
-                playAgainAnswer = UI_Methods.GetPlayAgainAnswer();
+                playAgainAnswer = UIMethods.GetPlayAgainAnswer();
 
             } while (playAgainAnswer == 'y' && geozAmount > 0);  // Game Loop end
 
             //  Final out put message
-            UI_Methods.DisplayLeavingMessage(geozAmount);
+            UIMethods.DisplayLeavingMessage(geozAmount);
         }
-
-        ///// <summary>
-        ///// Checks the line string for matches
-        ///// </summary>
-        ///// <param name="lineToCheck">The line to be cheched, as a string</param>
-        ///// <returns>bool value to indicate matching line or not</returns>
-        //static bool isLineWin(string lineToCheck)
-        //{
-        //    bool winningLine = (lineToCheck[0] == lineToCheck[1] && lineToCheck[0] == lineToCheck[2]);
-        //    return winningLine;
-        //}
 
         /// <summary>
         /// Takes line input, check if all match
