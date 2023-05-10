@@ -81,22 +81,21 @@ namespace SlotMachine
         }
 
         /// <summary>
-        /// Output wins message wtih number of wins
+        /// Output message showing if there are winning lines or not
         /// </summary>
         /// <param name="wins">the number of wins calculated from main logic</param>
         public static void DisplayMatchesMessage(int wins)
         {
-            Console.WriteLine($"\n\tWINNER WINNER - CONGRATULATIONS!!!");
-            Console.WriteLine($"\t{wins} MATCHED!!!");
-        }
 
-        /// <summary>
-        /// Output used when there are no matches
-        /// </summary>
-        public static void DisplayNoMatchesMessage()
-        {
-            Console.WriteLine($"\n\tNO MATCHES THIS SPIN!!!");
-
+            if (wins > 0)
+            {
+                Console.WriteLine($"\n\tWINNER WINNER - CONGRATULATIONS!!!");
+                Console.WriteLine($"\t{wins} MATCHED!!!");
+            }
+            else
+            {
+                Console.WriteLine($"\n\tNO MATCHES THIS SPIN!!!");
+            }
         }
 
         /// <summary>

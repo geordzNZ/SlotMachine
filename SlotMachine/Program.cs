@@ -143,15 +143,8 @@ namespace SlotMachine
                 UI_Methods.DisplaySlotGrid(topRow,middleRow,bottomRow);
 
 
-                //  - Output win / loss outcome and sign off
-                if (winCounter > 0)
-                {
-                    UI_Methods.DisplayMatchesMessage(winCounter);
-                }
-                else
-                {
-                    UI_Methods.DisplayNoMatchesMessage();
-                }
+                //  - Output win / loss outcome and current geoz
+                UI_Methods.DisplayMatchesMessage(winCounter);
                 UI_Methods.DisplayCurrentGeoz(geozAmount);
 
 
