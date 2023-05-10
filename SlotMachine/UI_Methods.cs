@@ -121,12 +121,24 @@ namespace SlotMachine
         }
 
         /// <summary>
-        /// Output used when leaving the game, with variable message
+        /// Output appropriate message if user is leaving with or with out geoz
         /// </summary>
-        /// <param name="msg1">Line 1 to be displayed</param>
-        /// <param name="msg2">Line 2 to be displayed</param>
-        public static void DisplayLeavingMessage(string msg1, string msg2)
+        /// <param name="geoz">Amount of geoz to control which message is displayed</param>
+        public static void DisplayLeavingMessage(int geoz)
         {
+            string msg1 = "";
+            string msg2 = "";
+             
+            if (geoz == 0)
+            {
+                msg1 = "Sorry ... not enough geoz for more games ...";
+                msg2 = "Calling the bouncers to escort you out of the building!";
+            }
+            else
+            {
+                msg1 = "Dont forget to pick up all your winnings ...";
+                msg2 = "Thanks for playing, see you real soon!!";
+            }
             Console.WriteLine($"\n\n\t{msg1}");
             Console.WriteLine($"\t{msg2}");
             Console.WriteLine($"\n{DIVIDER}\n");

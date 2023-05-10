@@ -170,18 +170,7 @@ namespace SlotMachine
             } while (playAgainAnswer == 'y' && geozAmount > 0);  // Game Loop end
 
             //  Final out put message
-            if (geozAmount == 0)
-            {
-                string msgLoss1 = "Sorry ... not enough geoz for more games ...";
-                string msgLoss2 = "Calling the bouncers to escort you out of the building!";
-                UI_Methods.DisplayLeavingMessage(msgLoss1, msgLoss2);
-            }
-            else
-            {
-                string msgWin1 = "Dont forget to pick up all your winnings ...";
-                string msgWin2 = "Thanks for playing, see you real soon!!";
-                UI_Methods.DisplayLeavingMessage(msgWin1, msgWin2);
-            }
+            UI_Methods.DisplayLeavingMessage(geozAmount);
         }
 
         ///// <summary>
