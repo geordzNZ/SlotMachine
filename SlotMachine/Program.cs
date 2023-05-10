@@ -18,16 +18,16 @@ namespace SlotMachine
         {
 
             // Game set up
+            Random randomSlot = new Random();
             int geozAmount = START_MONEY_VALUE;
-
             char playAgainAnswer = ' ';
+            
             do
             {
                 // Set up and make grid
                 int winCounter = 0;
                 int[,] slotGrid = new int[GRID_ROWS, GRID_COLUMNS];
 
-                Random randomSlot = new Random();
                 for (int row = 0; row < GRID_ROWS; row++)
                 {
                     for (int col = 0; col < GRID_COLUMNS; col++)
