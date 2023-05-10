@@ -12,7 +12,6 @@ namespace SlotMachine
         const int WIN_AMOUNT = 2;
         const int GRID_ROWS = 3;
         const int GRID_COLUMNS = 3;
-        const string POSSIBLE_LINE_OPTIONS = "tmblcrdu";
 
         static void Main(string[] args)
         {
@@ -55,42 +54,7 @@ namespace SlotMachine
                 UI_Methods.DisplayCurrentGeoz(geozAmount);
 
                 // Game option input and check amount wagered
-                string lineSelection = "";
-                do
-                {
-                    // Get line selection from user
-                    string lineSelectionInput = UI_Methods.GetLineSelection();
-
-                    // Validation of user inputs
-                    foreach (char lineInput in lineSelectionInput)
-                    {
-                        if (POSSIBLE_LINE_OPTIONS.Contains(lineInput))
-                        {
-                            if (!lineSelection.Contains(lineInput))
-                            {
-                                lineSelection += lineInput;
-                            }
-                        }
-                    }
-
-                    // Exit if no valid line chocies
-                    if (lineSelection.Length == 0)
-                    {
-                        continue;
-                    }
-
-                    // Confirm enough geoz to cover validated line choices
-                    if (geozAmount < lineSelection.Length)
-                    {
-                        UI_Methods.DisplayInsufficientGeoz(geozAmount);
-                        lineSelection = "";
-                        continue;
-                    }
-
-                    // All good then exit loop
-                    break;
-
-                } while (true);  // Game option input loop;
+                string lineSelection = UI_Methods.GetLineSelection(geozAmount);
 
                 // Adjust geoz amount for lines played
                 geozAmount -= lineSelection.Length;
@@ -148,18 +112,9 @@ namespace SlotMachine
                 UI_Methods.DisplayCurrentGeoz(geozAmount);
 
 
-                // Play again loop
-                do
-                {
-                    // Get user input
-                    ConsoleKeyInfo playAgainInput = UI_Methods.GetYesNoAnswer("Do you what to play again?");
+                // Play again user input
+                playAgainAnswer = UI_Methods.GetPlayAgainAnswer();
 
-                    if ((int)playAgainInput.KeyChar == 110 || (int)playAgainInput.KeyChar == 121) // only allow - n or y
-                    {
-                        playAgainAnswer = char.Parse(playAgainInput.KeyChar.ToString());
-                        break;
-                    }
-                } while (true);  // Play again loop
             } while (playAgainAnswer == 'y' && geozAmount > 0);  // Game Loop end
 
             //  Final out put message

@@ -11,6 +11,7 @@ namespace SlotMachine
     {
         const string DIVIDER = "==========================================================================";
         const string BLANKER = "                                                                          ";
+        const string POSSIBLE_LINE_OPTIONS = "tmblcrdu";
 
         /// <summary>
         /// Outputs Welcome game header text
@@ -54,16 +55,56 @@ namespace SlotMachine
         }
 
         /// <summary>
-        /// Prompts user to select line options from the game menu
+        /// Prompts user to select line options and validates input
         /// </summary>
-        /// <returns>string of the user entered options</returns>
-        public static string GetLineSelection()
+        /// <param name="geoz">The current geoz value</param>
+        /// <returns>validated string of the user entered line options</returns>
+        public static string GetLineSelection(int geoz)
         {
-            Console.WriteLine($"\tChoose lines based on Game Control Menu above...");
-            Console.Write($"\tLine selection: ");
-            string lineSelectionInput = Console.ReadLine();
+            // Game option input and check amount wagered
+            string lineSelection = "";
+            do
+            {
 
-            return lineSelectionInput;
+                Console.WriteLine($"\tChoose lines based on Game Control Menu above...");
+                Console.Write($"\tLine selection: ");
+                string lineSelectionInput = Console.ReadLine();
+
+                // Validation of user inputs
+                foreach (char lineInput in lineSelectionInput)
+                {
+                    if (POSSIBLE_LINE_OPTIONS.Contains(lineInput))
+                    {
+                        if (!lineSelection.Contains(lineInput))
+                        {
+                            lineSelection += lineInput;
+                        }
+                    }
+                }
+
+                // Exit if no valid line chocies
+                if (lineSelection.Length == 0)
+                {
+                    continue;
+                }
+
+                // Confirm enough geoz to cover validated line choices
+                if (geoz < lineSelection.Length)
+                {
+                    UI_Methods.DisplayInsufficientGeoz(geoz);
+                    lineSelection = "";
+                    continue;
+                }
+
+                // All good then exit loop
+                break;
+
+            } while (true);  // Game option input loop;
+
+
+
+
+            return lineSelection;
         }
 
         /// <summary>
@@ -103,11 +144,24 @@ namespace SlotMachine
         /// </summary>
         /// <param name="userPrompt">Text used to nudge user for an answer</param>
         /// <returns>ConsoleKeyInfo value to be validated</returns>
-        public static ConsoleKeyInfo GetYesNoAnswer(string userPrompt)
+        public static char GetPlayAgainAnswer()
         {
-            Console.Write($"\n\t{userPrompt} (y/n): ");
-            ConsoleKeyInfo playAgainInput = Console.ReadKey();
-            return playAgainInput;
+            char playAgainAnswer = ' ';
+            do
+            {
+                // Get user input
+                //ConsoleKeyInfo playAgainInput = UI_Methods.GetYesNoAnswer("");
+                Console.Write($"\n\tDo you what to play again? (y/n): ");
+                ConsoleKeyInfo playAgainInput = Console.ReadKey();
+
+                if ((int)playAgainInput.KeyChar == 110 || (int)playAgainInput.KeyChar == 121) // only allow - n or y
+                {
+                    playAgainAnswer = char.Parse(playAgainInput.KeyChar.ToString());
+                    break;
+                }
+            } while (true);  // Play again loop
+
+            return playAgainAnswer;
         }
 
         /// <summary>
