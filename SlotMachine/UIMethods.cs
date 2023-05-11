@@ -9,8 +9,8 @@ namespace SlotMachine
 {
     public static class UIMethods
     {
-        const string DIVIDER = "==========================================================================";
-        const string BLANKER = "                                                                          ";
+        const string DIVIDER = "======================================================================================";
+        const string BLANKER = "                                                                                      ";
         const string POSSIBLE_LINE_OPTIONS = "tmblcrdu";
 
         /// <summary>
@@ -110,30 +110,35 @@ namespace SlotMachine
         /// <summary>
         /// Output the slot grid to the screen
         /// </summary>
-        /// <param name="topRow">string representing the top row of the grid</param>
-        /// <param name="middleRow">string representing the middle row of the grid</param>
-        /// <param name="bottomRow">string representing the bottom row of the grid</param>
-        public static void DisplaySlotGrid(string topRow, string middleRow, string bottomRow)
+        /// <param name="slotGrid">the array representing the full slotGrid to be displayed</param>
+        public static void DisplaySlotGrid(int[,] slotGrid)
+        //public static void DisplaySlotGrid(string topRow, string middleRow, string bottomRow)
         {
             Console.WriteLine($"\n\t\tCurrent Spin");
-            Console.Write($"\t\t  {String.Join(' ', topRow.ToCharArray())}\n");
-            Console.Write($"\t\t  {String.Join(' ', middleRow.ToCharArray())}\n");
-            Console.Write($"\t\t  {String.Join(' ', bottomRow.ToCharArray())}\n");
+            for (int row = 0; row < slotGrid.GetLength(0); row++)
+            {
+                string line = "";
+                for (int col = 0; col < slotGrid.GetLength(1); col++)
+                {
+                    line += slotGrid[row, col];
+                }
+                Console.Write($"\t\t  {String.Join(' ', line.ToCharArray())}\n");
+            }
         }
 
         /// <summary>
-        /// Output message showing if there are winning lines or not
+        /// Output message showing if there are winning lines or not, and bonus 
         /// </summary>
         /// <param name="wins">the number of wins calculated from main logic</param>
-        /// <param name="lines">the number of lines played, used to display bonus message</param>
-        public static void DisplayMatchesMessage(int wins, int lines)
+        /// <param name="played">the number of lines played, used to display bonus message</param>
+        public static void DisplayMatchesMessage(int wins, int played)
         
         {
 
             if (wins > 0)
             {
                 Console.WriteLine($"\n\tWINNER WINNER - {wins} MATCHED - {wins * 2}g PAYOUT!!!");
-                if (wins == lines)
+                if (wins == played)
                 {
                     Console.WriteLine($"\tALL LINES WON             - {wins}g BONUS PAYOUT!!!");
                 }
