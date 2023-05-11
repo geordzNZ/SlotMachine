@@ -125,13 +125,18 @@ namespace SlotMachine
         /// Output message showing if there are winning lines or not
         /// </summary>
         /// <param name="wins">the number of wins calculated from main logic</param>
-        public static void DisplayMatchesMessage(int wins)
+        /// <param name="lines">the number of lines played, used to display bonus message</param>
+        public static void DisplayMatchesMessage(int wins, int lines)
+        
         {
 
             if (wins > 0)
             {
-                Console.WriteLine($"\n\tWINNER WINNER - CONGRATULATIONS!!!");
-                Console.WriteLine($"\t{wins} MATCHED!!!");
+                Console.WriteLine($"\n\tWINNER WINNER - {wins} MATCHED - {wins * 2}g PAYOUT!!!");
+                if (wins == lines)
+                {
+                    Console.WriteLine($"\tALL LINES WON             - {wins}g BONUS PAYOUT!!!");
+                }
             }
             else
             {

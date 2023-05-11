@@ -7,7 +7,7 @@ namespace SlotMachine
 {
     internal class Program
     {
-        const int SLOTS_MAX_VALUE = 3;
+        const int SLOTS_MAX_VALUE = 1;
         const int START_MONEY_VALUE = 15;
         const int WIN_AMOUNT = 2;
         const int GRID_ROWS = 3;
@@ -108,7 +108,7 @@ namespace SlotMachine
 
 
                 //  - Output win / loss outcome and current geoz
-                UIMethods.DisplayMatchesMessage(winCounter);
+                UIMethods.DisplayMatchesMessage(winCounter, lineSelection.Length);
                 UIMethods.DisplayCurrentGeoz(geozAmount);
 
 
