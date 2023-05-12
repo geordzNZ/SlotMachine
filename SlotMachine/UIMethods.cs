@@ -191,7 +191,7 @@ namespace SlotMachine
             if (geoz == 0)
             {
                 Console.WriteLine($"\n\n\tSorry ... not enough geoz for more games ...");
-                Console.WriteLine($"\n\n\tCalling the bouncers to escort you out of the building!)";
+                Console.WriteLine($"\n\n\tCalling the bouncers to escort you out of the building!");
             }
             else
             {

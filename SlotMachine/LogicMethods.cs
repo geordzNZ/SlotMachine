@@ -17,7 +17,7 @@ namespace SlotMachine
         /// <param name="cols">number of grid columns</param>
         /// <param name="slotMaxValue">used as upper limit in random number generate</param>
         /// <returns>the completed slot grid array</returns>
-        public static int[,] GenerateSlotGrid(int rows, int cols, int slotMaxValue)
+        public static int[,] GenerateSlotGrid(int rows, int cols)
         {
             Random randomSlot = new Random();
             int[,] tempSlotGrid = new int[rows, cols];
@@ -26,7 +26,7 @@ namespace SlotMachine
             {
                 for (int col = 0; col < cols; col++)
                 {
-                    int randomSlotValue = randomSlot.Next(slotMaxValue);
+                    int randomSlotValue = randomSlot.Next(Program.SLOTS_MAX_VALUE);
                     tempSlotGrid[row, col] = randomSlotValue;
                 }
             }
@@ -98,14 +98,13 @@ namespace SlotMachine
         /// </summary>
         /// <param name="wins">the number of winning lines</param>
         /// <param name="played">the number of lines played</param>
-        /// <param name="payout">amount won on each winning line</param>
         /// <returns></returns>
-        public static int AllocateWinnings(int wins, int played, int payout)
+        public static int AllocateWinnings(int wins, int played)
         {
             int total = 0;
             if (wins > 0)
             {
-                total += (wins * payout);
+                total += (wins * Program.WIN_AMOUNT);
 
                 if (wins == played)
                 {

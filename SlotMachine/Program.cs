@@ -7,9 +7,9 @@ namespace SlotMachine
 {
     internal class Program
     {
-        const int SLOTS_MAX_VALUE = 3;
+        public const int SLOTS_MAX_VALUE = 3;
+        public const int WIN_AMOUNT = 2;
         const int START_MONEY_VALUE = 15;
-        const int WIN_AMOUNT = 2;
         const int GRID_ROWS = 3;
         const int GRID_COLUMNS = 3;
 
@@ -26,7 +26,7 @@ namespace SlotMachine
                 // Set up and make grid
                 int winCounter = 0;
                 int[,] slotGrid = new int[GRID_ROWS, GRID_COLUMNS];
-                slotGrid = LogicMethods.GenerateSlotGrid(slotGrid.GetLength(0), slotGrid.GetLength(1), SLOTS_MAX_VALUE);
+                slotGrid = LogicMethods.GenerateSlotGrid(slotGrid.GetLength(0), slotGrid.GetLength(1));
 
                 // Output Header section
                 UIMethods.DisplayHeader();
@@ -43,7 +43,7 @@ namespace SlotMachine
                 winCounter = LogicMethods.CheckWinningLines(lineSelection, slotGrid);
 
                 // Adjust geoz amount for wins (and bonus if applicable)
-                geozAmount += LogicMethods.AllocateWinnings(winCounter, lineSelection.Length, WIN_AMOUNT);
+                geozAmount += LogicMethods.AllocateWinnings(winCounter, lineSelection.Length);
 
                 // Output section
                 //  - Slot grid on screen
