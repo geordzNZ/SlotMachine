@@ -40,7 +40,7 @@ namespace SlotMachine
         /// <param name="lineSelection">user selected, validated lines</param>
         /// <param name="slotGrid">the slot grid to check against</param>
         /// <returns>number of winning lines</returns>
-        public static int ValidateWinningLines(string lineSelection, int[,] slotGrid)
+        public static int CheckWinningLines(string lineSelection, int[,] slotGrid)
         {
             int winCounter = 0;
             foreach(char lineChoice in lineSelection) // t/m/b/l/c/r/d/u

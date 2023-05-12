@@ -40,7 +40,7 @@ namespace SlotMachine
                 geozAmount -= lineSelection.Length;
 
                 // Check for matches
-                winCounter = LogicMethods.ValidateWinningLines(lineSelection, slotGrid);
+                winCounter = LogicMethods.CheckWinningLines(lineSelection, slotGrid);
 
                 // Adjust geoz amount for wins (and bonus if applicable)
                 geozAmount += LogicMethods.AllocateWinnings(winCounter, lineSelection.Length, WIN_AMOUNT);
