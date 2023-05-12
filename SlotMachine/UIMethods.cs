@@ -188,21 +188,16 @@ namespace SlotMachine
         /// <param name="geoz">Amount of geoz to control which message is displayed</param>
         public static void DisplayLeavingMessage(int geoz)
         {
-            string msg1 = "";
-            string msg2 = "";
-             
             if (geoz == 0)
             {
-                msg1 = "Sorry ... not enough geoz for more games ...";
-                msg2 = "Calling the bouncers to escort you out of the building!";
+                Console.WriteLine($"\n\n\tSorry ... not enough geoz for more games ...");
+                Console.WriteLine($"\n\n\tCalling the bouncers to escort you out of the building!)";
             }
             else
             {
-                msg1 = "Dont forget to pick up all your winnings ...";
-                msg2 = "Thanks for playing, see you real soon!!";
+                Console.WriteLine($"\n\n\tDont forget to pick up all your winnings ...");
+                Console.WriteLine($"\n\n\tThanks for playing, see you real soon!!");
             }
-            Console.WriteLine($"\n\n\t{msg1}");
-            Console.WriteLine($"\t{msg2}");
             Console.WriteLine($"\n{DIVIDER}\n");
         }
     }
